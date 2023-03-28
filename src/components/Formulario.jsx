@@ -1,5 +1,6 @@
 //Se importa el hook
 import { useState, useEffect } from 'react';
+import Error from './Error';
 
 const Formulario = ({ pacientes, setPacientes }) => {
   //Los Hooks Deben ir siempre antes del return, no pueden estar dentro de una condicional
@@ -40,7 +41,7 @@ const Formulario = ({ pacientes, setPacientes }) => {
       sintomas
     }
     //Se agregan los valores a un nuevo objeto
-    setPacientes([...pacientes,objetoPaciente])
+    setPacientes([...pacientes, objetoPaciente])
 
     //Se reinician los valores:
     setNombre('')
@@ -67,7 +68,7 @@ const Formulario = ({ pacientes, setPacientes }) => {
 
         {/* Podemos modificar este ternario para que no nos muestre el todo ok con un &&, luego modificamos con un div de acuerdo a las necesidades de la notificación */}
         {/* {error ? 'Hay un error' : 'Todo ok'} */}
-        {error && <div className="bg-rose-600 text-white text-center p-3 uppercase font-bold mb-3 rounded-md"><p>Todos los campos son obligatorios.</p></div>}
+        {error && <Error>"Todos los campos son obligatorios."</Error> }
 
         <div className='mb-5'>
           <label htmlFor="mascota" className='block text-gray-700 uppercase font-bold'>
