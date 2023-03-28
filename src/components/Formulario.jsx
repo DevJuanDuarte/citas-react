@@ -161,8 +161,6 @@ const Formulario = ({ pacientes, setPacientes }) => {
           <textarea
             id="sintomas"
             placeholder='Describe detalladamente los sintomas del animal.'
-            cols="20"
-            rows="5"
             className='border-2 w-full placeholder-gray-400 p-2 mt-2 rounded-md'
             value={sintomas}
             //Se agrega onChange y luego un callback con el metodo y un evento
