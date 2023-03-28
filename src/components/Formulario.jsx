@@ -1,7 +1,7 @@
 //Se importa el hook
 import { useState, useEffect } from 'react';
 
-const Formulario = () => {
+const Formulario = ({ pacientes, setPacientes }) => {
   //Los Hooks Deben ir siempre antes del return, no pueden estar dentro de una condicional
   const [nombre, setNombre] = useState('');
   const [propietario, setPropietario] = useState('');
@@ -18,17 +18,38 @@ const Formulario = () => {
 
     //VALIDACIÓN DEL FORMULARIO
     //Tenemos acceso a todos los valores ya que la funcion se encuentra dentro del formulario
-    if ([nombre,propietario,email,fecha,hora,sintomas].includes('')) {
+    if ([nombre, propietario, email, fecha, hora, sintomas].includes('')) {
       //Luego agregamos una condicion para verificar que todos los campos no se encuentren vacíos.
       setError(true)
-      
+
       // console.log('Todos llenos');
       //Para retornar el valor a false una vez que el formulario haga submit con los campos completos podemos quitar el else, colocar return y luego seguir con el programa y pasar de nuevo setError a false, asi:
       return
-      
+
     }
     //Por fuera de la condición
     setError(false)
+
+    //Objeto paciente:
+    const objetoPaciente = {
+      nombre,
+      propietario,
+      email,
+      fecha,
+      hora,
+      sintomas
+    }
+    //Se agregan los valores a un nuevo objeto
+    setPacientes([...pacientes,objetoPaciente])
+
+    //Se reinician los valores:
+    setNombre('')
+    setPropietario('')
+    setEmail('')
+    setFecha('')
+    setHora('')
+    setSintomas('')
+
   }
 
 
