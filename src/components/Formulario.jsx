@@ -1,13 +1,30 @@
+//Se importa el hook
+import { useState, useEffect } from 'react';
+
 const Formulario = () => {
+  //Los Hooks Deben ir siempre antes del return, no pueden estar dentro de una condicional
+  const [nombre, setNombre] = useState('');
+  const [propietario, setPropietario] = useState('');
+  const [email, setEmail] = useState('');
+  const [fecha, setFecha] = useState('');
+  const [hora, setHora] = useState('');
+  const [sintomas, setSintomas] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Enviando..');
+  }
+
+
   return (
-    <div className="md:w-1/2 lg:w-2/5">
+    <div className="md:w-1/2 lg:w-2/5 mx-5">
 
       <h2 className='font-black text-3xl text-center'>Seguimiento Pacientes</h2>
       <p className='text-lg mt-5 text-center mb-10'>Añade Pacientes y {" "}
         <span className='text-indigo-600 font-bold'>Administralos</span>
       </p>
 
-      <form className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
+      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
 
         <div className='mb-5'>
           <label htmlFor="mascota" className='block text-gray-700 uppercase font-bold'>
@@ -17,7 +34,14 @@ const Formulario = () => {
             id="mascota"
             className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
             type="text"
-            placeholder='Nombre de la Mascota' />
+            placeholder='Nombre de la Mascota'
+            //Leyendo información escrita y colocandola en un state
+            //Se agrega el valor del hook
+            value={nombre}
+            //Se agrega onChange y luego un callback con el metodo y un evento
+            onChange={(e) => setNombre(e.target.value)}
+          />
+
         </div>
 
         <div className='mb-5'>
@@ -28,7 +52,11 @@ const Formulario = () => {
             id="propietario"
             className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
             type="text"
-            placeholder='Nombre del Propietario' />
+            placeholder='Nombre del Propietario'
+            value={propietario}
+            //Se agrega onChange y luego un callback con el metodo y un evento
+            onChange={(e) => setPropietario(e.target.value)}
+          />
         </div>
 
         <div className='mb-5'>
@@ -39,7 +67,11 @@ const Formulario = () => {
             id="email"
             className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
             type="email"
-            placeholder='Correo Electronico' />
+            placeholder='Correo Electronico'
+            value={email}
+            //Se agrega onChange y luego un callback con el metodo y un evento
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
 
         <div className='mb-5'>
@@ -49,7 +81,11 @@ const Formulario = () => {
           <input
             id="fecha"
             className='border-2 w-full placeholder-gray-400 p-2 mt-2 rounded-md'
-            type="date" />
+            type="date"
+            value={fecha}
+            //Se agrega onChange y luego un callback con el metodo y un evento
+            onChange={(e) => setFecha(e.target.value)}
+          />
         </div>
 
         <div className='mb-5'>
@@ -59,7 +95,11 @@ const Formulario = () => {
           <input
             id="hora"
             className='border-2 w-full placeholder-gray-400 p-2 mt-2 rounded-md'
-            type="time" />
+            type="time"
+            value={hora}
+            //Se agrega onChange y luego un callback con el metodo y un evento
+            onChange={(e) => setHora(e.target.value)}
+          />
         </div>
 
         <div className='mb-5'>
@@ -72,13 +112,17 @@ const Formulario = () => {
             cols="20"
             rows="5"
             className='border-2 w-full placeholder-gray-400 p-2 mt-2 rounded-md'
+            value={sintomas}
+            //Se agrega onChange y luego un callback con el metodo y un evento
+            onChange={(e) => setSintomas(e.target.value)}
           />
         </div>
 
-        <input 
-        type="submit" 
-        value="Agregar Paciente"
-        className='bg-indigo-600 hover:bg-indigo-700 w-full p-3 cursor-pointer text-white uppercase font-bold rounded-md transition-all' />
+        <input
+          type="submit"
+          value="Agregar Paciente"
+          className='bg-indigo-600 hover:bg-indigo-700 w-full p-3 cursor-pointer text-white uppercase font-bold rounded-md transition-all'
+        />
       </form>
     </div>
   )
