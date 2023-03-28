@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Formulario = () => {
   return (
     <div className="md:w-1/2 lg:w-2/5">
@@ -46,12 +44,22 @@ const Formulario = () => {
 
         <div className='mb-5'>
           <label htmlFor="fecha" className='block text-gray-700 uppercase font-bold'>
-            fecha de alta
+            fecha de ingreso
           </label>
           <input
             id="fecha"
             className='border-2 w-full placeholder-gray-400 p-2 mt-2 rounded-md'
             type="date" />
+        </div>
+
+        <div className='mb-5'>
+          <label htmlFor="hora" className='block text-gray-700 uppercase font-bold'>
+            hora de ingreso
+          </label>
+          <input
+            id="hora"
+            className='border-2 w-full placeholder-gray-400 p-2 mt-2 rounded-md'
+            type="time" />
         </div>
 
         <div className='mb-5'>
