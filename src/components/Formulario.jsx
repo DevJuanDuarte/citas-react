@@ -10,10 +10,28 @@ const Formulario = () => {
   const [hora, setHora] = useState('');
   const [sintomas, setSintomas] = useState('');
 
+  const [error, setError] = useState(false);
+
   const handleSubmit = (e) => {
+
     e.preventDefault();
-    console.log('Enviando..');
+
+    //VALIDACIÓN DEL FORMULARIO
+    //Tenemos acceso a todos los valores ya que la funcion se encuentra dentro del formulario
+    if ([nombre,propietario,email,fecha,hora,sintomas].includes('')) {
+      //Luego agregamos una condicion para verificar que todos los campos no se encuentren vacíos.
+      setError(true)
+      
+      // console.log('Todos llenos');
+      //Para retornar el valor a false una vez que el formulario haga submit con los campos completos podemos quitar el else, colocar return y luego seguir con el programa y pasar de nuevo setError a false, asi:
+      return
+      
+    }
+    //Por fuera de la condición
+    setError(false)
   }
+
+
 
 
   return (
@@ -25,6 +43,10 @@ const Formulario = () => {
       </p>
 
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
+
+        {/* Podemos modificar este ternario para que no nos muestre el todo ok con un &&, luego modificamos con un div de acuerdo a las necesidades de la notificación */}
+        {/* {error ? 'Hay un error' : 'Todo ok'} */}
+        {error && <div className="bg-rose-600 text-white text-center p-3 uppercase font-bold mb-3 rounded-md"><p>Todos los campos son obligatorios.</p></div>}
 
         <div className='mb-5'>
           <label htmlFor="mascota" className='block text-gray-700 uppercase font-bold'>
