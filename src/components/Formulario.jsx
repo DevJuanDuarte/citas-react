@@ -66,7 +66,7 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
       const pacientesActualizados = pacientes.map(pacienteState => pacienteState.id === paciente.id ? objetoPaciente : pacienteState)
       
       setPacientes(pacientesActualizados)
-      console.log('paciente editado');
+      // console.log('paciente editado');
     } else {
       objetoPaciente.id = generarId()
       setPacientes([...pacientes, objetoPaciente])
@@ -191,6 +191,7 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
         <div className="flex justify-center ">
           <input
             type="submit"
+            //Condición para cambiar valores de acuerdo a editar o crear un registro
             value={paciente.id ? 'Editar Paciente' : 'Agregar Paciente'}
             className='bg-indigo-600 hover:bg-indigo-700 w-3/5 p-3 cursor-pointer text-white uppercase font-bold rounded-md transition-all mx-auto'
           />
