@@ -1,10 +1,10 @@
-const Paciente = ({paciente , setPaciente, eliminarPaciente}) => {
+const Paciente = ({ paciente, setPaciente, eliminarPaciente }) => {
 
-    const {nombre, propietario, email, fecha, sintomas, id} = paciente
+    const { nombre, propietario, email, fecha, sintomas, id } = paciente
 
     const handleEliminar = () => {
         const respuesta = confirm('Deseas eliminar este paciente?')
-        if ( respuesta ) {
+        if (respuesta) {
             eliminarPaciente(id)
         }
     }
@@ -26,12 +26,23 @@ const Paciente = ({paciente , setPaciente, eliminarPaciente}) => {
 
             <p className='font-bold mb-3 text-gray-700 uppercase'>Sintomas: {" "}
                 <span className='font-normal normal-case'>{sintomas}</span></p>
-            
-            <div className="flex justify-between mt-10">
-                <button className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-lg" type="button" onClick={() => setPaciente(paciente)}>Editar</button>
 
-                <button className="py-2 px-10 bg-rose-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-lg" type="button" 
-                onClick={handleEliminar}>Eliminar</button>
+            <div className="flex justify-between mt-10">
+                {/* <button className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-lg" type="button" onClick={() => setPaciente(paciente)}>Editar</button> */}
+                <button
+                    className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-lg"
+                    type="button"
+                    onClick={() => {
+                        setPaciente(paciente);
+                        window.scrollTo(0, 400);
+                    }}
+                >
+                    Editar
+                </button>
+
+
+                <button className="py-2 px-10 bg-rose-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-lg" type="button"
+                    onClick={handleEliminar}>Eliminar</button>
             </div>
         </div>
     )
