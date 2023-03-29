@@ -4,7 +4,7 @@ import Error from './Error';
 
 const Formulario = ({ pacientes, setPacientes, paciente }) => {
 
-  
+
   //Los Hooks Deben ir siempre antes del return, no pueden estar dentro de una condicional
   const [nombre, setNombre] = useState('');
   const [propietario, setPropietario] = useState('');
@@ -14,17 +14,17 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
 
   const [error, setError] = useState(false);
 
-  useEffect(()=>{
-    if(Object.keys(paciente).length > 0) {
+  useEffect(() => {
+    if (Object.keys(paciente).length > 0) {
       setNombre(paciente.nombre)
       setPropietario(paciente.propietario)
       setEmail(paciente.email)
       setFecha(paciente.fecha)
       setSintomas(paciente.sintomas)
-    } 
+    }
   }, [paciente])
 
- 
+
 
   const generarId = () => {
     const random = Math.random().toString(36).substring(2)
@@ -57,11 +57,22 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
       propietario,
       email,
       fecha,
-      sintomas,
-      id: generarId()
+      sintomas
     }
-    //Se agregan los valores a un nuevo objeto
-    setPacientes([...pacientes, objetoPaciente])
+
+    //Editar pacientes:
+    if (paciente.id) {
+      objetoPaciente.id = paciente.id
+      const pacientesActualizados = pacientes.map(pacienteState => pacienteState.id === paciente.id ? objetoPaciente : pacienteState)
+      
+      setPacientes(pacientesActualizados)
+      console.log('paciente editado');
+    } else {
+      objetoPaciente.id = generarId()
+      setPacientes([...pacientes, objetoPaciente])
+      // console.log('Nuevo registro');
+    }
+    
 
     //Se reinician los valores:
     setNombre('')
@@ -71,9 +82,6 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
     setSintomas('')
 
   }
-
-
-
 
   return (
     <div className="md:w-1/2 lg:w-2/5 mx-5">
@@ -180,11 +188,14 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
           />
         </div>
 
-        <input
-          type="submit"
-          value="Agregar Paciente"
-          className='bg-indigo-600 hover:bg-indigo-700 w-full p-3 cursor-pointer text-white uppercase font-bold rounded-md transition-all'
-        />
+        <div className="flex justify-center ">
+          <input
+            type="submit"
+            value={paciente.id ? 'Editar Paciente' : 'Agregar Paciente'}
+            className='bg-indigo-600 hover:bg-indigo-700 w-3/5 p-3 cursor-pointer text-white uppercase font-bold rounded-md transition-all mx-auto'
+          />
+        </div>
+
       </form>
     </div>
   )
