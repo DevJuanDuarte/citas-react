@@ -1,6 +1,6 @@
-const Paciente = ({paciente}) => {
+const Paciente = ({paciente , setPaciente}) => {
 
-    const {nombre, propietario, email, fecha, hora, sintomas} = paciente
+    const {nombre, propietario, email, fecha, sintomas} = paciente
 
     return (
         <div className='mx-5 bg-white shadow-md px-5 py-10 rounded-xl mb-5'>
@@ -15,16 +15,14 @@ const Paciente = ({paciente}) => {
                 <span className='font-normal normal-case'>{email}</span></p>
 
             <p className='font-bold mb-3 text-gray-700 uppercase'>Fecha de Ingreso: {" "}
-                <span className='font-normal normal-case'>{fecha}</span></p>
-
-            <p className='font-bold mb-3 text-gray-700 uppercase'>Hora de Ingreso: {" "}
-                <span className='font-normal normal-case'>{hora}</span></p>
+                <span className='font-normal normal-case'>{new Date(fecha).toLocaleString()}</span></p>
 
             <p className='font-bold mb-3 text-gray-700 uppercase'>Sintomas: {" "}
                 <span className='font-normal normal-case'>{sintomas}</span></p>
             
-            <div className="flex space-x-4 mt-5">
-                <button className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-lg" type="button">Editar</button>
+            <div className="flex justify-between mt-10">
+                <button className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-lg" type="button" onClick={() => setPaciente(paciente)}>Editar</button>
+
                 <button className="py-2 px-10 bg-rose-600 hover:bg-rose-700 text-white font-bold uppercase rounded-lg" type="button">Eliminar</button>
             </div>
         </div>

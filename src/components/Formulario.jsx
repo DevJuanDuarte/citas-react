@@ -2,16 +2,29 @@
 import { useState, useEffect } from 'react';
 import Error from './Error';
 
-const Formulario = ({ pacientes, setPacientes }) => {
+const Formulario = ({ pacientes, setPacientes, paciente }) => {
+
+  
   //Los Hooks Deben ir siempre antes del return, no pueden estar dentro de una condicional
   const [nombre, setNombre] = useState('');
   const [propietario, setPropietario] = useState('');
   const [email, setEmail] = useState('');
   const [fecha, setFecha] = useState('');
-  const [hora, setHora] = useState('');
   const [sintomas, setSintomas] = useState('');
 
   const [error, setError] = useState(false);
+
+  useEffect(()=>{
+    if(Object.keys(paciente).length > 0) {
+      setNombre(paciente.nombre)
+      setPropietario(paciente.propietario)
+      setEmail(paciente.email)
+      setFecha(paciente.fecha)
+      setSintomas(paciente.sintomas)
+    } 
+  }, [paciente])
+
+ 
 
   const generarId = () => {
     const random = Math.random().toString(36).substring(2)
@@ -26,7 +39,7 @@ const Formulario = ({ pacientes, setPacientes }) => {
 
     //VALIDACIÓN DEL FORMULARIO
     //Tenemos acceso a todos los valores ya que la funcion se encuentra dentro del formulario
-    if ([nombre, propietario, email, fecha, hora, sintomas].includes('')) {
+    if ([nombre, propietario, email, fecha, sintomas].includes('')) {
       //Luego agregamos una condicion para verificar que todos los campos no se encuentren vacíos.
       setError(true)
 
@@ -44,7 +57,6 @@ const Formulario = ({ pacientes, setPacientes }) => {
       propietario,
       email,
       fecha,
-      hora,
       sintomas,
       id: generarId()
     }
@@ -56,7 +68,6 @@ const Formulario = ({ pacientes, setPacientes }) => {
     setPropietario('')
     setEmail('')
     setFecha('')
-    setHora('')
     setSintomas('')
 
   }
@@ -76,7 +87,7 @@ const Formulario = ({ pacientes, setPacientes }) => {
 
         {/* Podemos modificar este ternario para que no nos muestre el todo ok con un &&, luego modificamos con un div de acuerdo a las necesidades de la notificación */}
         {/* {error ? 'Hay un error' : 'Todo ok'} */}
-        {error && <Error>"Todos los campos son obligatorios."</Error> }
+        {error && <Error>"Todos los campos son obligatorios."</Error>}
 
         <div className='mb-5'>
           <label htmlFor="mascota" className='block text-gray-700 uppercase font-bold'>
@@ -133,14 +144,15 @@ const Formulario = ({ pacientes, setPacientes }) => {
           <input
             id="fecha"
             className='border-2 w-full placeholder-gray-400 p-2 mt-2 rounded-md'
-            type="date"
+            type="datetime-local"
             value={fecha}
+
             //Se agrega onChange y luego un callback con el metodo y un evento
             onChange={(e) => setFecha(e.target.value)}
           />
         </div>
 
-        <div className='mb-5'>
+        {/* <div className='mb-5'>
           <label htmlFor="hora" className='block text-gray-700 uppercase font-bold'>
             hora de ingreso
           </label>
@@ -152,7 +164,7 @@ const Formulario = ({ pacientes, setPacientes }) => {
             //Se agrega onChange y luego un callback con el metodo y un evento
             onChange={(e) => setHora(e.target.value)}
           />
-        </div>
+        </div> */}
 
         <div className='mb-5'>
           <label htmlFor="sintomas" className='block text-gray-700 uppercase font-bold'>
@@ -160,7 +172,7 @@ const Formulario = ({ pacientes, setPacientes }) => {
           </label>
           <textarea
             id="sintomas"
-            placeholder='Describe detalladamente los sintomas del animal.'
+            placeholder='Describe detalladamente los sintomas del paciente.'
             className='border-2 w-full placeholder-gray-400 p-2 mt-2 rounded-md'
             value={sintomas}
             //Se agrega onChange y luego un callback con el metodo y un evento
