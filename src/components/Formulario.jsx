@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Error from './Error';
 
-const Formulario = ({ pacientes, setPacientes, paciente }) => {
+const Formulario = ({ pacientes, setPacientes, paciente, setPaciente }) => {
 
 
   //Los Hooks Deben ir siempre antes del return, no pueden estar dentro de una condicional
@@ -66,6 +66,7 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
       const pacientesActualizados = pacientes.map(pacienteState => pacienteState.id === paciente.id ? objetoPaciente : pacienteState)
       
       setPacientes(pacientesActualizados)
+      setPaciente({})
       // console.log('paciente editado');
     } else {
       objetoPaciente.id = generarId()

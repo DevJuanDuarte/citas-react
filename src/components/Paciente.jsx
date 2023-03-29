@@ -34,7 +34,7 @@ const Paciente = ({ paciente, setPaciente, eliminarPaciente }) => {
                     type="button"
                     onClick={() => {
                         setPaciente(paciente);
-                        window.scrollTo(0, 400);
+                        window.scrollTo(0, 320);
                     }}
                 >
                     Editar
